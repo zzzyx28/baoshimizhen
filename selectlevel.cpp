@@ -12,9 +12,9 @@ selectlevel::selectlevel(QWidget *parent) :
     this->setPalette(palette);
 
     levelL->setGeometry(260,20,91,41);
-    level1L->setGeometry(100,130,100,50);
-    level2L->setGeometry(250,130,100,50);
-    level3L->setGeometry(420,130,100,50);
+    level1L->setGeometry(80,130,120,50);
+    level2L->setGeometry(230,130,120,50);
+    level3L->setGeometry(400,130,120,50);
     DoneL->setGeometry(260,213,101,30);
     levelL->setParent(this);
     levelL->setVisible(true);

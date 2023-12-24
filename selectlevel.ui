@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/picture/Settingpage/dialogbutton.png);</string>
+     <string notr="true">background-color: rgb(0, 170, 255);</string>
     </property>
     <property name="text">
      <string/>
@@ -40,7 +40,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/picture/Settingpage/dialogbutton.png);</string>
+     <string notr="true">background-color: rgb(0, 170, 255);</string>
     </property>
     <property name="text">
      <string/>
@@ -56,7 +56,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/picture/Settingpage/dialogbutton.png);</string>
+     <string notr="true">background-color: rgb(0, 170, 255);</string>
     </property>
     <property name="text">
      <string/>
@@ -72,7 +72,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">background-color: rgb(0, 170, 255);</string>
     </property>
     <property name="text">
      <string/>
@@ -88,7 +88,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">background-color: rgb(255, 0, 0);</string>
     </property>
     <property name="text">
      <string/>

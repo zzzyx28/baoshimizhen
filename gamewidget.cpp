@@ -18,7 +18,7 @@ void GameWidget::setupScene(int i){
     trans=0;
 
     scoreTextLbl=new QLabel(this);
-    scoreTextLbl->setGeometry(360,130,150,50);
+    scoreTextLbl->setGeometry(360,130,250,150);
     scoreTextLbl->setAlignment(Qt::AlignCenter);
     scoreTextLbl->setFont(QFont("Euclid",40,QFont::Normal));
     scoreTextLbl->setStyleSheet("QLabel{color:white;}");
@@ -75,7 +75,7 @@ void GameWidget::setupScene(int i){
 
     reSetButton = new HoverButton(this);
     reSetButton->setGeometry(ui->reSetBtn->geometry());
-    reSetButton->setImage(":/picture/Settingpage/dialogbutton.png",nullptr,ui->reSetBtn->width(),ui->reSetBtn->height(),ui->reSetBtn);
+    reSetButton->setImage("",nullptr,ui->reSetBtn->width(),ui->reSetBtn->height(),ui->reSetBtn);
 
     //语言切换
     if(i==1){
