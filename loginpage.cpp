@@ -197,7 +197,9 @@ void loginPage::SetButton(){
 
           if (loggedIn) {
               client->logined = true;
+
               client->username=tempId;
+
               QMessageBox msgBox;
               msgBox.setText("User successfully logged in");
               msgBox.exec();

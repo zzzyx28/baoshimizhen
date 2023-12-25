@@ -3,6 +3,7 @@
 #include "qmessagebox.h"
 //#include "startpage.h"
 //#include "ui_startpage.h"
+#include "user.h"
 
 class StartPage;
 
@@ -158,43 +159,63 @@ void registerPage::SetButton(){
   //    this->show();
   //  }) ;
 
-  connect(confirmButton,&HoverButton::clicked, [=]() {
-    QString tempId = idText->toPlainText();
-    QString tempPwd = pwdText->text();
-    client->registerNewUser(tempId, tempPwd);
-    int flag = client->registerFlag;
+  connect(confirmButton, &HoverButton::clicked, [=]() {
+      QString tempId = idText->toPlainText();
+      QString tempPwd = pwdText->text();
 
-    QMessageBox msgBox;   // 生成对象
-    if(flag == 0) {
-      msgBox.setText("User has been registered");    // 设置文本
-    }
+      // 打开或创建用户信息文件
+      QFile file("user_info.txt");
+      if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+          QMessageBox::critical(this, "Error", "Failed to open user_info.txt!");
+          return;
+      }
 
-    if(flag == 1) {
-      msgBox.setText("User register successfully");    // 设置文本
-    }
+      QTextStream in(&file);
+      QList<User> users; // 用于存储用户信息的列表
 
-    msgBox.exec();
+      // 读取现有用户信息
+      while (!in.atEnd()) {
+          QString line = in.readLine();
+          QStringList parts = line.split(':');
+          if (parts.size() == 2) {
+              User user;
+              user.username = parts[0];
+              user.password = parts[1];
+              users.append(user);
+          }
+      }
 
-    idText->setText((""));
-    pwdText->setText((""));
-    //    noticePage *notice = new noticePage();
-    //    if(flag == 0) {
-    //      notice->setNotice("User has been registered");
-    //    }
+      // 检查是否存在相同用户名的用户
+      bool userExists = false;
+      for (const User &user : users) {
+          if (user.username == tempId) {
+              userExists = true;
+              break;
+          }
+      }
 
-    //    if(flag == 1) {
-    //      notice->setNotice("User register successfully");
-    //      //      user a;
-    //      //      a.username = tempId;
-    //      //      a.password = tempPwd;
-    //      //      a.score = 0;
-    //      //      a.rank = 0;
-    //      //      database->update(a);
-    //      //      database->setGamer(a);
-    //    }
+      if (userExists) {
+          QMessageBox::information(this, "Registration", "User already exists.");
+      } else {
+          // 注册新用户
+          User newUser;
+          newUser.username = tempId;
+          newUser.password = tempPwd;
+          users.append(newUser);
 
-    //    notice->show();
+          // 将用户信息写入文件
+          file.resize(0); // 清空文件内容
+          QTextStream out(&file);
+          for (const User &user : users) {
+              out << user.username << ":" << user.password << endl;
+          }
 
+          QMessageBox::information(this, "Registration", "User registered successfully.");
+          idText->clear();
+          pwdText->clear();
+      }
+
+      file.close();
   });
 }
 
