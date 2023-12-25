@@ -1,6 +1,7 @@
-
+QT += core gui sql
 QT  +=  multimedia
 QT  +=  sql
+QT += sql core
 QT       += core gui
 QT       += core gui multimedia widgets
 QT       += axcontainer

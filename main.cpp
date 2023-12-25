@@ -1,10 +1,15 @@
 #include "startpage.h"
 #include "gamewidget.h"
+#include "database.h"
 #include <QSplashScreen>
 #include <QApplication>
-
+#include <QMessageBox>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 #include "client.h"
 Client *client;
+database *mysql;
 void sleep(int msec){
     QTime dieTime = QTime::currentTime().addMSecs(msec);
     while( QTime::currentTime() < dieTime )
@@ -13,6 +18,7 @@ void sleep(int msec){
 
  int main(int argc, char *argv[])
 {
+
     QApplication a(argc, argv);
     QImage image(":/picture/splash.jpg");
     QSize size(1920,1080);
@@ -30,5 +36,6 @@ void sleep(int msec){
     splash.showMessage("Loading finished...",Qt::AlignHCenter|Qt::AlignTop,Qt::white);
     sleep(500);
     splash.finish(&w);
+
     return a.exec();
 }

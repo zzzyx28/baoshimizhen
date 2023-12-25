@@ -6,15 +6,17 @@
 #include <QString>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QSqlError>
+#include <QMessageBox>
 class database
 {
 public:
     database();
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+    //QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     QVector<QVector<QString>>userinfo;
-    void connect();
-    bool add(QString user, QString mark);
+    bool connect(QString user,int score);
+    bool add(QString user, int score);
     bool del(QString name);
     bool findall();
 };

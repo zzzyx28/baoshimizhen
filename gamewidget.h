@@ -21,11 +21,16 @@
 #include<qsoundeffect.h>
 #include<QTemporaryDir>
 #include <QFont>
+#include <QMessageBox>
 #include"settingpage.h"
+#include"database.h"
 #include "client.h"
 #define TO_BOMB 100
 
 extern Client *client;
+
+extern database *mysql;
+
 class Point{
 public:
     int x;
