@@ -73,5 +73,6 @@
         <file>picture/splash.jpg</file>
         <file>picture/GameWidget/gamebk.png</file>
         <file>picture/GameWidget/frame.png</file>
+        <file>music/background/music.wav</file>
     </qresource>
 </RCC>

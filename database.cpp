@@ -19,6 +19,13 @@ bool database::connect(QString user,int score){
         qDebug()<<"error open database because"<<db.lastError();
     }
 
+
+
+    return db.isOpen();
+}
+
+bool database::add(QString user,int score){
+
     QSqlQuery query;
     query.prepare("INSERT INTO game_rank (user, score) VALUES (:value1, :value2)");
     query.bindValue(":value1", user);
@@ -26,40 +33,26 @@ bool database::connect(QString user,int score){
 
     if (query.exec()) {
         qDebug() << "Insert successful";
+        userinfo.push_back(user);
         return true;
+    }else{
         qDebug() << "Insert error:" << query.lastError().text();
     }
     return false;
 
-    return db.isOpen();
 }
 
-bool database::add(QString user,int score){
-    // qDebug()<<"into adding"<<db.lastError();
-    // QSqlQuery query(db);
-    // qDebug()<<"before prepare"<<db.lastError();
-    // query.prepare("insert into rank(user,score) values(:user,:score);");
-    // qDebug()<<"after prepare";
-    // query.bindValue(":user",user);
-    // qDebug()<<"after bindValue";
-    // query.bindValue(":score",score);
-    // if(query.exec())
-    // {
-    //     findall();
-    //     return true;
-    // }else{
-    //     qDebug()<<"fail to add";
-    // }
-    // return false;
+bool database::change(QString user, int score){
     QSqlQuery query;
-    query.prepare("insert into rank(user,score) values(:user,:score);");
+    query.prepare("UPDATE game_rank SET score=:score WHERE user=:user;");
     query.bindValue(":user",user);
-    query.bindValue("score",score);
-    query.exec("insert into rank values('qwert',123);");
-    if(query.execBatch()){
-        qDebug()<<"success to exec"<<"   user:  "<<user<<"     score:  "<<score;
+    query.bindValue(":score",score);
+    if (query.exec()) {
+        qDebug() << "change successful";
+        return true;
     }else{
-        qDebug()<<"fail to exec";
+        qDebug() << "change error:" << query.lastError().text();
     }
-}
+    return false;
 
+}

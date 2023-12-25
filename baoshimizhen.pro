@@ -54,7 +54,8 @@ HEADERS += \
     startpage.h \
     gamewidget.h \
     myprobar.h \
-    gem.h
+    gem.h \
+    user.h
 
 FORMS += \
     loginpage.ui \

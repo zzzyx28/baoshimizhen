@@ -14,9 +14,10 @@ public:
     database();
 
     //QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    QVector<QVector<QString>>userinfo;
+    QVector<QString>userinfo;
     bool connect(QString user,int score);
     bool add(QString user, int score);
+    bool change(QString user,int score);
     bool del(QString name);
     bool findall();
 };

@@ -20,7 +20,7 @@ public:
   bool logined;
 //private:
   QTcpSocket * socket;
-  QString username;
+  QString username="NullName";
   QString password;
 
 private slots:

@@ -6,23 +6,12 @@ GameWidget::GameWidget(QWidget *parent) :
     ui(new Ui::GameWidget)
 {
     ui->setupUi(this);
-
+    mysql->connect("",10);
 
 }
 
 //背景初始化
 void GameWidget::setupScene(int i){
-
-
-    // if(mysql->connect("zzzzyx",35235)){
-    //     QMessageBox::information(this, "infor", "success");
-
-    //     //mysql->add("zzzzyx",35235);
-
-    // }else{
-    //     QMessageBox::information(this, "infor", "open failed");
-    // }
-
 
     gameOver=false;
     is_paused=false;
@@ -46,7 +35,7 @@ void GameWidget::setupScene(int i){
     //循环播放背景音乐
 
     sound=new QSoundEffect(this);
-    sound->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/music/background/music-2.wav"));
+    sound->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/music/background/music.wav"));
     sound->setLoopCount(QSoundEffect::Infinite);
     sound->play();
 
@@ -560,6 +549,7 @@ void GameWidget::playSound(int type){
     effect=new QSound(src);
     effect->play();
 }
+
 void GameWidget::startGame(){
     boardWidget = new QWidget(this);
 
@@ -617,6 +607,7 @@ void GameWidget::startGame(){
         int s = updateBombList();
         score+=s;
         if(s!=0){
+
             Sleep(100);
             forbidAll(true);//禁用
             is_acting=true;
@@ -628,10 +619,13 @@ void GameWidget::startGame(){
         }
         playSound(eliminateTimes);
 
+
+
         delete group;
     });
     connect(this,&GameWidget::finishCount,this,&GameWidget::finishAct);
 }
+
 
 void GameWidget::allFallOut(){
     is_acting=true;
@@ -907,6 +901,11 @@ void GameWidget::swap(int SX,int SY,int gemX,int gemY){
     group->addAnimation(anim11);
     group->addAnimation(anim2);
     group->start(QAbstractAnimation::DeleteWhenStopped);
+
+    mysql->change(client->username,score);
+    mysql->add(client->username,score);
+
+
 }
 
 //下落动画
@@ -1474,6 +1473,19 @@ int GameWidget::updateBombList() {
         }
     }
 
+
+    // if(!mysql->userinfo.contains(client->username)){
+    //     qDebug()<<"no contain";
+    //     mysql->add(client->username,score);
+
+    // }else{
+    //     qDebug()<<"do contain";
+    //     mysql->change(client->username,score);
+
+    // }
+
+    // mysql->add(client->username,score);
+    // mysql->change(client->username,score);
     return score;
 }
 
