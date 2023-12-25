@@ -15,7 +15,7 @@ StartPage::StartPage(QWidget *parent) :
     //循环播放背景音乐
     qDebug()<<QCoreApplication::applicationDirPath();
     sound=new QSoundEffect(this);
-    sound->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/music/background/music-1.wav"));
+    sound->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+""));
     sound->setLoopCount(QSoundEffect::Infinite);
     sound->play();
 
@@ -28,9 +28,9 @@ StartPage::StartPage(QWidget *parent) :
     logoutButton = new HoverButton();
 
     
-    startButton->setSound(":/music/button/button_mouseover.wav", ":/music/button/button_mouseleave.wav", ":/music/button/button_press.wav", ":/music/button/button_release.wav"); //默认音效
-    recordButton->setSound(":/music/button/button_mouseover.wav", ":/music/button/button_mouseleave.wav", ":/music/button/button_press.wav", ":/music/button/button_release.wav"); //默认音效
-    settingButton->setSound(":/music/button/button_mouseover.wav", ":/music/button/button_mouseleave.wav", ":/music/button/button_press.wav", ":/music/button/button_release.wav"); //默认音效
+    // startButton->setSound(":/music/button/button_mouseover.wav", ":/music/button/button_mouseleave.wav", ":/music/button/button_press.wav", ":/music/button/button_release.wav"); //默认音效
+    // recordButton->setSound(":/music/button/button_mouseover.wav", ":/music/button/button_mouseleave.wav", ":/music/button/button_press.wav", ":/music/button/button_release.wav"); //默认音效
+    // settingButton->setSound(":/music/button/button_mouseover.wav", ":/music/button/button_mouseleave.wav", ":/music/button/button_press.wav", ":/music/button/button_release.wav"); //默认音效
 
     //禁用最大化按钮、设置窗口大小固定
     this->setWindowFlags(windowFlags()& ~Qt::WindowMaximizeButtonHint);

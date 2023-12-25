@@ -131,6 +131,31 @@ QPropertyAnimation *  loginPage::ShowBackground(){
   return bkAnim;
 }
 
+bool loginPage::readUserInfoFromFile(const QString &fileName, const QString &userNameAndPassword)
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << "Failed to open user info file!";
+        return false;
+    }
+
+    QTextStream in(&file);
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+
+        if (line == userNameAndPassword)
+        {
+            file.close();
+            return true; // 用户名和密码匹配
+        }
+    }
+
+    file.close();
+    return false; // 未找到匹配的用户信息
+}
+
 void loginPage::SetButton(){
   returnButton->setCircle(this->width()/10, this->width()/2+300, this->height()/2+400, this->width(), this->height(),\
                            ":/picture/button/ball.png", "", this);
@@ -172,6 +197,9 @@ void loginPage::SetButton(){
 
           if (loggedIn) {
               client->logined = true;
+
+              client->username=tempId;
+
               QMessageBox msgBox;
               msgBox.setText("User successfully logged in");
               msgBox.exec();
