@@ -776,6 +776,7 @@ void GameWidget::act(Gem* gem){
 
         // 让选中宝石与(gemX, gemY)交换
         swap(SX, SY, gemX, gemY);
+
         Sleep(300);
 
         // 在对象矩阵中交换
@@ -866,6 +867,10 @@ void GameWidget::act(Gem* gem){
         // 让选中宝石旋转
         makeSpin(selectedX, selectedY);
     }
+    //修改数据库
+    mysql->change(client->username,score);
+    mysql->add(client->username,score);
+
 }
 
 //交换按钮位置
@@ -901,9 +906,6 @@ void GameWidget::swap(int SX,int SY,int gemX,int gemY){
     group->addAnimation(anim11);
     group->addAnimation(anim2);
     group->start(QAbstractAnimation::DeleteWhenStopped);
-
-    mysql->change(client->username,score);
-    mysql->add(client->username,score);
 
 
 }
