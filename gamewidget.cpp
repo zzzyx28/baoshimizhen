@@ -35,7 +35,7 @@ void GameWidget::setupScene(int i){
     //循环播放背景音乐
 
     sound=new QSoundEffect(this);
-    sound->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/music/background/music.wav"));
+    sound->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/music/background/music-2.wav"));
     sound->setLoopCount(QSoundEffect::Infinite);
     sound->play();
 

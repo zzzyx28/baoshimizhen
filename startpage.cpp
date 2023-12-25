@@ -15,7 +15,7 @@ StartPage::StartPage(QWidget *parent) :
     //循环播放背景音乐
     qDebug()<<QCoreApplication::applicationDirPath();
     sound=new QSoundEffect(this);
-    sound->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/music/background/music.wav"));
+    sound->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/music/background/music-1.wav"));
     sound->setLoopCount(QSoundEffect::Infinite);
     sound->play();
 
