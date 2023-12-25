@@ -158,60 +158,32 @@ void loginPage::SetButton(){
   //    this->show();
   //  }) ;
 
-  connect(confirmButton,&HoverButton::clicked, [=]() {
-    QString tempId = idText->toPlainText();
-    QString tempPwd = pwdText->text();
-    if(client->logined == true){
-      QMessageBox msgBox;
-      msgBox.setText("Already logged in user");
-      msgBox.exec();
-    }
-    else {
-      client->verifyUser(tempId, tempPwd);
-      int flag = client->verifyFlag;
-      if(flag == 2) {
-        client->logined = true;
+  connect(confirmButton, &HoverButton::clicked, [=]() {
+      QString tempId = idText->toPlainText();
+      QString tempPwd = pwdText->text();
+      QString userNameAndPassword = tempId + ":" + tempPwd; // 使用冒号分隔用户名和密码
+
+      if (client->logined == true) {
+          QMessageBox msgBox;
+          msgBox.setText("Already logged in user");
+          msgBox.exec();
+      } else {
+          bool loggedIn = readUserInfoFromFile("user_info.txt", userNameAndPassword);
+
+          if (loggedIn) {
+              client->logined = true;
+              QMessageBox msgBox;
+              msgBox.setText("User successfully logged in");
+              msgBox.exec();
+          } else {
+              QMessageBox msgBox;
+              msgBox.setText("Invalid username or password");
+              msgBox.exec();
+          }
+
+          idText->setText("");
+          pwdText->setText("");
       }
-      //    int flag = database->loginFunc(tempId,tempPwd);
-      //    vector<user> tempGamers =database->showRankList();
-      //    bool userFlag = false;
-      //    bool pwdFlag = false;
-
-      //    for (auto iter = tempGamers.begin(); iter != tempGamers.end(); iter++) {
-      //      if(strcmp(tempId.toStdString().c_str(),(*iter).username.toStdString().c_str()) == 0) {
-      //        //          cout << "zhaodaoyoinghu" << endl;
-      //        userFlag = true;
-      //        if(strcmp(tempPwd.toStdString().c_str(),(*iter).password.toStdString().c_str()) == 0) {
-      //          pwdFlag = true;
-      //          user a = *iter;
-      //          database->setGamer(a);
-      //          cout << "mimazhengque" << endl;
-      //        }
-      //      }
-      //    }
-
-
-
-      QMessageBox msgBox;   // 生成对象
-      if(flag == 0) {
-        msgBox.setText("The user hasn't been register");    // 设置文本
-      }
-
-      if(flag == 1) {
-        msgBox.setText("The user password is wrong");    // 设置文本
-      }
-
-      if (flag == 2) {
-        msgBox.setText("User successfully logged in");    // 设置文
-      }
-
-      msgBox.exec();  // 执行
-
-      idText->setText((""));
-      pwdText->setText((""));
-    }
-
-
   });
 }
 
