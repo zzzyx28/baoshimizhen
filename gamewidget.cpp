@@ -8,7 +8,7 @@ GameWidget::GameWidget(QWidget *parent) :
     ui->setupUi(this);
     mysql->connect();
 }
-
+int magicx=10;
 //背景初始化
 void GameWidget::setupScene(int i){
 
@@ -59,11 +59,13 @@ void GameWidget::setupScene(int i){
     redBorder->setGeometry(610, 2, 1055, 1073);
     setAdaptedImg(":/picture/frame_red.png",redBorder);
     redBorder->setAttribute(Qt::WA_TransparentForMouseEvents);
+
     //辅助label，不用管
     ui->menuLbl->setVisible(false);
     ui->hintLbl->setVisible(false);
     ui->pauseLbl->setVisible(false);
     ui->reSetBtn->setVisible(false);
+    ui->freezeBtn->setVisible(false);
 
     menuButton = new HoverButton(this);
     menuButton->setGeometry(ui->menuLbl->geometry());
@@ -81,6 +83,10 @@ void GameWidget::setupScene(int i){
     reSetButton->setGeometry(ui->reSetBtn->geometry());
     reSetButton->setImage("",nullptr,ui->reSetBtn->width(),ui->reSetBtn->height(),ui->reSetBtn);
 
+    freezeButton = new HoverButton(this);
+    freezeButton->setGeometry(ui->freezeBtn->geometry());
+    freezeButton->setImage("",nullptr,ui->freezeBtn->width(),ui->freezeBtn->height(),ui->freezeBtn);
+
     //语言切换
     if(i==1){
         menuButton->showContent("MENU",20);
@@ -91,6 +97,8 @@ void GameWidget::setupScene(int i){
         pauseButton->show();
         reSetButton->showContent("RESET",15);
         reSetButton->show();
+        freezeButton->showContent("Freezing",20);
+        freezeButton->show();
     }
     if(i==0){
         menuButton->showContent("菜单",20);
@@ -101,6 +109,8 @@ void GameWidget::setupScene(int i){
         pauseButton->show();
         reSetButton->showContent("重置",15);
         reSetButton->show();
+        freezeButton->showContent("冰冻",20);
+        freezeButton->show();
     }
     // //设置鼠标-普通
     // setCursor(QCursor(QPixmap("://picture/mouse1.png")));
@@ -134,6 +144,13 @@ void GameWidget::setupScene(int i){
     anim3->setStartValue(QRect(653+1055,1010,982,47));
     anim3->setEndValue(QRect(653,1010,982,47));
     anim3->setEasingCurve(QEasingCurve::OutQuad);
+
+    QPropertyAnimation* anim9 = new QPropertyAnimation(ui->frozenLbl,"geometry");
+    anim9->setDuration(500);
+    anim9->setStartValue(QRect(653+1055,1010,982,47));
+    anim9->setEndValue(QRect(653,1010,982,47));
+    anim9->setEasingCurve(QEasingCurve::OutQuad);
+
     //菜单栏
     QPropertyAnimation* anim4 = new QPropertyAnimation(menuButton,"geometry");
     anim4->setDuration(500);
@@ -155,6 +172,11 @@ void GameWidget::setupScene(int i){
     anim7->setStartValue(QRect(reSetButton->x(),reSetButton->y()+1000,reSetButton->width(),reSetButton->height()));
     anim7->setEndValue(QRect(reSetButton->x(),reSetButton->y(),reSetButton->width(),reSetButton->height()));
     anim6->setEasingCurve((QEasingCurve::OutQuad));
+    QPropertyAnimation* anim8 = new QPropertyAnimation(freezeButton,"geometry");
+    anim8->setDuration(500);
+    anim8->setStartValue(QRect(freezeButton->x(),freezeButton->y()+1000,freezeButton->width(),freezeButton->height()));
+    anim8->setEndValue(QRect(freezeButton->x(),freezeButton->y(),freezeButton->width(),freezeButton->height()));
+    anim8->setEasingCurve((QEasingCurve::OutQuad));
 
     QParallelAnimationGroup *group = new QParallelAnimationGroup;
     group->addAnimation(anim1);
@@ -164,6 +186,8 @@ void GameWidget::setupScene(int i){
     group->addAnimation(anim5);
     group->addAnimation(anim6);
     group->addAnimation(anim7);
+    group->addAnimation(anim8);
+    group->addAnimation(anim9);
     group->start(QAbstractAnimation::DeleteWhenStopped);
 
     Sleep(600);
@@ -294,6 +318,8 @@ void GameWidget::setupScene(int i){
             delete pauseTXLbl;
         if(pauseButton)
             delete pauseButton;
+        if(freezeButton)
+            delete freezeButton;
         if(progressTimer)
             delete progressTimer;
         if(progressBar)
@@ -409,6 +435,41 @@ void GameWidget::setupScene(int i){
             }
         }
     });
+
+    connect(freezeButton,&HoverButton::clicked,[=]{
+        if(gameOver)
+            return;
+        if(!is_acting&&magicx!=10){
+            progressTimer->stop();
+            ui->frozenLbl->raise();
+            setAdaptedImg(":/picture/frozen.png",ui->frozenLbl);
+            ui->frozenLbl->setVisible(true);
+//            reSetBoard();
+//            if(!is_paused&&magicType=3)
+//                       for(int i=0;i<8;i++){
+                         for(int j=0;j<8;j++){
+                            delete gems[magicx][j];
+                         }
+//                       }
+
+                       QParallelAnimationGroup *group=new QParallelAnimationGroup;
+                       for(int j = 7; j >=0; --j){
+                          gemType[magicx][j] = gemType[i][j] % static_cast<unsigned int>(DIFFICULITY) + 1;
+                          gems[magicx][j] = new Gem(static_cast<int>(gemType[magicx][j]), 118, magicx, j , boardWidget);
+                          gems[magicx][j]->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+                          group->addAnimation(startfallAnimation(gems[magicx][j],j+1));
+                          connect(gems[magicx][j], &Gem::mouseClickedGem, this, &GameWidget::act);
+                       }
+                       group->start();
+//                       nothinganother-=1;
+                       magicx=10;
+                       Sleep(6000);
+                       ui->frozenLbl->setVisible(false);
+                       progressTimer->start();
+         }
+
+    });
+
 }
 
 void GameWidget::reSetBoard() {
@@ -1191,12 +1252,12 @@ void GameWidget::generateMagic(int cX, int cY, int type, int time){
                     tempList[i]->bomb();
 
             unsigned int tty = gemType[cX][cY] * 10 + static_cast<unsigned int>(type);
-
             if(tty % 10 == 3){ // 魔方
                 gemType[cX][cY] = tty;
                 gems[cX][cY]->type = 0;
                 makeStopSpin(cX, cY);
                 makeSpin(cX, cY);
+                magicx=cX;
             }
             else if(tty % 10 == 2){ // 爆炸
                 gemType[cX][cY] = tty;
@@ -1297,13 +1358,18 @@ int GameWidget::getBombsToMakeMagic(int cX, int cY, std::vector<Gem*> bombsToMak
     }
 
     int magicType = -1; // -1 无特殊效果, 0 普通三消, 1 爆炸, 2 十字消, 3 魔方
+    int flag=0;
     if(bombsToMakeMagic.size() >= 3){
-        if(cNum == 4 || rNum == 4)
+        if(cNum == 4 || rNum == 4){
             magicType = 3; // 魔方
-        else if((rNum == 3 && cNum == 0) || (rNum == 0 && cNum == 3))
+            flag=1;
+        }
+        else if(flag==0 && ((rNum == 3 && cNum == 0) || (rNum == 0 && cNum == 3)))
             magicType = 2; // 十字消
-        else
+        else{
+            if (flag==0)
             magicType = 1; // 爆炸
+        }
     } else if(bombsToMakeMagic.size() == 2){
         if((rNum == 2 && cNum <= 1) || (rNum <= 1 && cNum == 2))
             magicType = 0; // 普通三消
@@ -1315,7 +1381,7 @@ int GameWidget::getBombsToMakeMagic(int cX, int cY, std::vector<Gem*> bombsToMak
     } else if(time == 2){
         bombsToMakeMagic2 = bombsToMakeMagic;
     }
-
+flag=0;
     return magicType;
 }
 

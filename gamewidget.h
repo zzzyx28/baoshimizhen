@@ -93,7 +93,9 @@ private:
     HoverButton *menuButton=nullptr;
     HoverButton *hintButton=nullptr;
     HoverButton *pauseButton=nullptr;
+    HoverButton *freezeButton=nullptr;
     MyProBar* progressBar=nullptr;
+    MyProBar* frozenBar=nullptr;
     QTimer *progressTimer=nullptr;
     QLabel* selectedLbl=nullptr;
     QTimer* timeoutTimer=nullptr;
