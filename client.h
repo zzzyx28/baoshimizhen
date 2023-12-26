@@ -18,9 +18,9 @@ public:
   int verifyFlag;
   int registerFlag;
   bool logined;
-private:
+//private:
   QTcpSocket * socket;
-  QString username;
+  QString username="NullName";
   QString password;
 
 private slots:

@@ -1,6 +1,7 @@
-
+QT += core gui sql
 QT  +=  multimedia
 QT  +=  sql
+QT += sql core
 QT       += core gui
 QT       += core gui multimedia widgets
 QT       += axcontainer
@@ -53,7 +54,8 @@ HEADERS += \
     startpage.h \
     gamewidget.h \
     myprobar.h \
-    gem.h
+    gem.h \
+    user.h
 
 FORMS += \
     loginpage.ui \

@@ -34,6 +34,9 @@ class loginPage : public QWidget
   Q_OBJECT
 
 public:
+
+  bool readUserInfoFromFile(const QString &fileName, const QString &userNameAndPassword);
+
   explicit loginPage(QWidget *parent = nullptr);
   QPropertyAnimation *bkAnim;
   ~loginPage();
