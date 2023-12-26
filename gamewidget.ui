@@ -74,8 +74,8 @@
   <widget class="QLabel" name="hintLbl">
    <property name="geometry">
     <rect>
-     <x>279</x>
-     <y>613</y>
+     <x>280</x>
+     <y>610</y>
      <width>308</width>
      <height>272</height>
     </rect>
@@ -90,8 +90,8 @@
   <widget class="QLabel" name="pauseLbl">
    <property name="geometry">
     <rect>
-     <x>271</x>
-     <y>885</y>
+     <x>190</x>
+     <y>890</y>
      <width>301</width>
      <height>201</height>
     </rect>
@@ -117,6 +117,32 @@
    </property>
    <property name="text">
     <string>reset</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="freezeBtn">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>910</y>
+     <width>141</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Freezing</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="frozenLbl">
+   <property name="geometry">
+    <rect>
+     <x>1220</x>
+     <y>1000</y>
+     <width>72</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Frozen</string>
    </property>
   </widget>
  </widget>
