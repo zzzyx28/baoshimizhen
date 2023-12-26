@@ -31,7 +31,7 @@ bool database::add(QString user,int score){
 
     if (query.exec()) {
         qDebug() << "Insert successful";
-        userinfo.push_back(user);
+        //userinfo.push_back(user);
         return true;
     }else{
         qDebug() << "Insert error:" << query.lastError().text();

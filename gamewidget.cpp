@@ -262,6 +262,8 @@ void GameWidget::setupScene(int i){
         if(is_acting)
             return;
         client->update(score);
+
+
         sound->stop();
         this->hide();
         showStartPage();
