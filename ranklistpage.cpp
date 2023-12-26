@@ -15,6 +15,14 @@ rankListPage::rankListPage(QWidget *parent) :
                                               QWidget(parent),
                                               ui(new Ui::rankListPage)
 {
+
+    QSqlDatabase db=mysql->connect();
+    if(db.isOpen()){
+        qDebug()<<"ranklist connect success";
+    }else{
+        qDebug()<<"ranklist connect fail";
+    }
+
     this->hide();
   ui->setupUi(this);
   returnButton = new HoverButton();
@@ -83,27 +91,31 @@ rankListPage::rankListPage(QWidget *parent) :
   group->addAnimation(ShowTitle());
   Sleep(200);
   group->start(QAbstractAnimation::DeleteWhenStopped);
-  //    });
 
-  //  vector<player> tempGamers =database->showRankList();
-  client->getProfile();
-  client->getRankList();
-  QString s = client->ranklist;
-  QString s1 = client->userlist;
-  //  for (auto iter = tempGamers.begin(); iter != tempGamers.end(); iter++) {
-  //    //      qDebug()<<QString("id:%1    password:%2    score:%3    rank:%4").arg((*iter).username).arg((*iter).password).arg((*iter).score).arg((*iter).rank);
-  //    s = s + (*iter).username + "\t\t\t\t" + QString::number((*iter).score) + "\t\t\t\t" + QString::number((*iter).rank)  + "\n";
-  //    cout << s.toStdString() << endl;
-  //  }
 
-  labelRanklist->raise();
-  labelUserRanklist->raise();
+  QSqlQuery query;
+  if(!query.exec("SELECT * FROM game_rank")){
+    QMessageBox::critical(this, "Query Error", query.lastError().text());
+    return;
+  }
 
-  ranklist->setText(s);
-  ranklist->raise();
+  QSqlTableModel *model = new QSqlTableModel(this, db);
+  model->setTable("game_rank");
+  model->select();
 
-  userRanklist->setText(s1);
-  userRanklist->raise();
+
+  QTableView *tableView = new QTableView(this);
+  // 设置表格的字体
+  QFont font("Arial", 20); // 使用 Arial 字体，字号为 20
+  tableView->setFont(font);
+
+  tableView->setGeometry(500,300,2000,800);
+  tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+  //tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+  tableView->setModel(model);
+
+  // 将表格视图添加到主窗口
+  tableView->show();
 
   this->hide();
 }
@@ -156,24 +168,8 @@ void rankListPage::SetButton(){
     this->hide();
 
     showStartPage();
-    //    vector<user> tempGamers =database->showRankList();
-    //    QString s = "ID\t\t\t\tSCORE\t\t\t\tRANK\n";
 
-    //    for (auto iter = tempGamers.begin(); iter != tempGamers.end(); iter++) {
-    //      //      qDebug()<<QString("id:%1    password:%2    score:%3    rank:%4").arg((*iter).username).arg((*iter).password).arg((*iter).score).arg((*iter).rank);
-    //      s = s + (*iter).username + "\t\t\t\t" + QString::number((*iter).score) + "\t\t\t\t" + QString::number((*iter).rank)  + "\n";
-    //      cout << s.toStdString() << endl;
-    //    }
-
-    //    ranklist->setText(s);
-    //    this->hide();
-    //    gameWidget->setupScene();
-    //    gameWidget->show();
   }) ;
-
-  //  connect(gameWidget, &GameWidget::showStartPage, [=](){
-  //    this->show();
-  //  }) ;
 
 
 }

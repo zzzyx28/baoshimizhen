@@ -6,12 +6,13 @@ GameWidget::GameWidget(QWidget *parent) :
     ui(new Ui::GameWidget)
 {
     ui->setupUi(this);
-    mysql->connect("",10);
-
+    mysql->connect();
 }
 
 //背景初始化
 void GameWidget::setupScene(int i){
+
+    mysql->add(client->username,score);
 
     gameOver=false;
     is_paused=false;
@@ -869,7 +870,6 @@ void GameWidget::act(Gem* gem){
     }
     //修改数据库
     mysql->change(client->username,score);
-    mysql->add(client->username,score);
 
 }
 

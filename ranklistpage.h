@@ -14,9 +14,21 @@
 #include <QTemporaryDir>
 #include <QTextBrowser>
 #include "client.h"
-//#include "startpage.h"
-//#include "ui_startpage.h"
+#include "database.h"
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QMessageBox>
+#include <QSqlTableModel>
+#include <QTableView>
+#include <QHeaderView>
+
+// #include "startpage.h"
+// #include "ui_startpage.h"
+
+
 extern Client *client;
+extern database *mysql;
 
 namespace Ui {
 class rankListPage;

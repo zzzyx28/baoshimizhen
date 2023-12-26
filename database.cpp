@@ -2,7 +2,7 @@
 
 database::database() {}
 
-bool database::connect(QString user,int score){
+QSqlDatabase database::connect(){
 
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
@@ -19,9 +19,7 @@ bool database::connect(QString user,int score){
         qDebug()<<"error open database because"<<db.lastError();
     }
 
-
-
-    return db.isOpen();
+    return db;
 }
 
 bool database::add(QString user,int score){
@@ -54,5 +52,9 @@ bool database::change(QString user, int score){
         qDebug() << "change error:" << query.lastError().text();
     }
     return false;
+
+}
+
+bool database::rankList(){
 
 }
