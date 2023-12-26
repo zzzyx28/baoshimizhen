@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>GameWidget</class>
@@ -149,3 +150,156 @@
  <resources/>
  <connections/>
 </ui>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GameWidget</class>
+ <widget class="QWidget" name="GameWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1920</width>
+    <height>1080</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QLabel" name="oriBkLbl">
+   <property name="geometry">
+    <rect>
+     <x>243</x>
+     <y>0</y>
+     <width>1434</width>
+     <height>1080</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="borderLbl">
+   <property name="geometry">
+    <rect>
+     <x>1665</x>
+     <y>2</y>
+     <width>1055</width>
+     <height>1078</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="scoreLbl">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>60</y>
+     <width>391</width>
+     <height>231</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="menuLbl">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>400</y>
+     <width>261</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>menu</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="hintLbl">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>610</y>
+     <width>308</width>
+     <height>272</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>hint</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pauseLbl">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>890</y>
+     <width>301</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>pause</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="reSetBtn">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>280</y>
+     <width>241</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>reset</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="freezeBtn">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>910</y>
+     <width>141</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Freezing</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="frozenLbl">
+   <property name="geometry">
+    <rect>
+     <x>1220</x>
+     <y>1000</y>
+     <width>72</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Frozen</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+>>>>>>> 1275c8aa00fce8d77af47c8826c228218e6c0901

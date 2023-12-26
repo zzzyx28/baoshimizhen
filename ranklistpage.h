@@ -22,7 +22,10 @@
 #include <QSqlTableModel>
 #include <QTableView>
 #include <QHeaderView>
+<<<<<<< HEAD
 #include <QStandardItemModel>
+=======
+>>>>>>> 1275c8aa00fce8d77af47c8826c228218e6c0901
 
 // #include "startpage.h"
 // #include "ui_startpage.h"
