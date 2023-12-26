@@ -8,6 +8,8 @@
 #include <QSqlRecord>
 #include <QSqlError>
 #include <QMessageBox>
+#include <QSqlTableModel>
+#include <QTableView>
 class database
 {
 public:
@@ -15,10 +17,11 @@ public:
 
     //QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     QVector<QString>userinfo;
-    bool connect(QString user,int score);
+    QSqlDatabase connect();
     bool add(QString user, int score);
     bool change(QString user,int score);
     bool del(QString name);
+    bool rankList();
     bool findall();
 };
 
