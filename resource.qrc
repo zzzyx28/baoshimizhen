@@ -73,5 +73,6 @@
         <file>picture/GameWidget/Gem/waterSQ.gif</file>
         <file>picture/splash.jpg</file>
         <file>picture/GameWidget/gamebk.png</file>
+        <file>picture/frozen.png</file>
     </qresource>
 </RCC>
