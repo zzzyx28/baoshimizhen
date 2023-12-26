@@ -93,16 +93,21 @@ rankListPage::rankListPage(QWidget *parent) :
   group->start(QAbstractAnimation::DeleteWhenStopped);
 
 
-  QSqlQuery query;
-  if(!query.exec("SELECT * FROM game_rank")){
+  QSqlQuery query("SELECT * FROM game_rank ORDER BY score DESC", db);
+
+  if(!query.exec("SELECT * FROM game_rank ORDER BY score DESC")){
     QMessageBox::critical(this, "Query Error", query.lastError().text());
     return;
   }
 
-  QSqlTableModel *model = new QSqlTableModel(this, db);
-  model->setTable("game_rank");
-  model->select();
+  // QSqlTableModel *model = new QSqlTableModel(this, db);
 
+  // model->setTable("game_rank");
+  // model->select();
+
+  // 创建一个数据模型，并将查询结果加载到模型中
+  QSqlQueryModel *model = new QSqlQueryModel;
+  model->setQuery(query);
 
   QTableView *tableView = new QTableView(this);
   // 设置表格的字体
