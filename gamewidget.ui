@@ -46,9 +46,9 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>60</y>
-     <width>391</width>
-     <height>231</height>
+     <y>10</y>
+     <width>481</width>
+     <height>481</height>
     </rect>
    </property>
    <property name="text">
@@ -58,8 +58,8 @@
   <widget class="QLabel" name="menuLbl">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>400</y>
+     <x>290</x>
+     <y>390</y>
      <width>261</width>
      <height>201</height>
     </rect>
@@ -74,8 +74,8 @@
   <widget class="QLabel" name="hintLbl">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>610</y>
+     <x>270</x>
+     <y>530</y>
      <width>308</width>
      <height>272</height>
     </rect>
@@ -90,8 +90,8 @@
   <widget class="QLabel" name="pauseLbl">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>890</y>
+     <x>270</x>
+     <y>730</y>
      <width>301</width>
      <height>201</height>
     </rect>
@@ -106,8 +106,8 @@
   <widget class="QLabel" name="reSetBtn">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>280</y>
+     <x>290</x>
+     <y>260</y>
      <width>241</width>
      <height>161</height>
     </rect>
@@ -122,10 +122,10 @@
   <widget class="QLabel" name="freezeBtn">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>910</y>
-     <width>141</width>
-     <height>161</height>
+     <x>270</x>
+     <y>890</y>
+     <width>321</width>
+     <height>181</height>
     </rect>
    </property>
    <property name="text">

@@ -19,6 +19,7 @@ public:
     QLabel*level1L=new QLabel("Easy");
     QLabel*level2L=new QLabel("Medium");
     QLabel*level3L=new QLabel("Hard");
+    QLabel*level4L=new QLabel("Challenge");
     QLabel*levelL=new QLabel("Level");
     QLabel*DoneL=new QLabel("Done");
 
@@ -28,15 +29,19 @@ private slots:
 
     void on_level1B_released();
 
+    void on_level2B_released();
+
     void on_level2B_pressed();
 
     void on_level3B_pressed();
 
-    void on_DoneB_pressed();
-
-    void on_level2B_released();
-
     void on_level3B_released();
+
+    void on_level4B_pressed();
+
+    void on_level4B_released();
+
+    void on_DoneB_pressed();
 
     void on_DoneB_released();
 

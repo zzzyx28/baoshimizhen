@@ -1,4 +1,4 @@
-#include "selectlevel.h"
+﻿#include "selectlevel.h"
 #include "ui_selectlevel.h"
 #include"qfont.h"
 selectlevel::selectlevel(QWidget *parent) :
@@ -15,7 +15,8 @@ selectlevel::selectlevel(QWidget *parent) :
     level1L->setGeometry(80,130,120,50);
     level2L->setGeometry(230,130,120,50);
     level3L->setGeometry(400,130,120,50);
-    DoneL->setGeometry(260,213,101,30);
+    level4L->setGeometry(80,213,120,50);
+    DoneL->setGeometry(260,213,120,50);
     levelL->setParent(this);
     levelL->setVisible(true);
     level1L->setParent(this);
@@ -23,6 +24,8 @@ selectlevel::selectlevel(QWidget *parent) :
     level2L->setParent(this);
     levelL->setVisible(true);
     level3L->setParent(this);
+    levelL->setVisible(true);
+    level4L->setParent(this);
     levelL->setVisible(true);
     DoneL->setParent(this);
     DoneL->setVisible(true);
@@ -101,6 +104,18 @@ void selectlevel::on_level3B_released()
     level3L->setPalette(purple);
 }
 
+void selectlevel::on_level4B_pressed()
+{
+    level4L->setPalette(dyellow);
+}
+
+void selectlevel::on_level4B_released()
+{
+    level=8;//Yang
+    initColor();
+    level4L->setPalette(purple);
+}
+
 void selectlevel::on_DoneB_pressed()
 {
     DoneL->setPalette(dyellow);
@@ -124,6 +139,7 @@ void selectlevel::initColor()
     level1L->setPalette(white);
     level2L->setPalette(white);
     level3L->setPalette(white);
+    level4L->setPalette(white);
     levelL->setPalette(white);
     DoneL->setPalette(white);
 }

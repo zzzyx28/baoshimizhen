@@ -106,14 +106,14 @@ void settingpage::paintEvent(QPaintEvent *)
 //打开文档
 void settingpage::on_Help_clicked()
 {
-    QFile file(":/doc/Exp.doc");
+    QFile file(":/doc/Exp.docx");
     QTemporaryDir tempDir;
     tempDir.setAutoRemove(false);
     if (tempDir.isValid()) {
-        QString tempFile = tempDir.path() + "/Exp.doc";
-        if (QFile::copy(":/doc/Exp.doc", tempFile)) {
+        QString tempFile = tempDir.path() + "/Exp.docx";
+        if (QFile::copy(":/doc/Exp.docx", tempFile)) {
             //now extracted to the filesystem
-            QDesktopServices::openUrl(QUrl::fromLocalFile(tempDir.path() + "/Exp.doc"));
+            QDesktopServices::openUrl(QUrl::fromLocalFile(tempDir.path() + "/Exp.docx"));
         }
     }
 }
@@ -132,7 +132,7 @@ void settingpage::onSpinValueChanged(int i)
 //打开网页
 void settingpage::on_Web_clicked()
 {
-    QDesktopServices::openUrl(QUrl(QLatin1String("https://gitee.com/zzzyx28/baoshimizhen")));
+    QDesktopServices::openUrl(QUrl(QLatin1String("https://github.com/zzzyx28/baoshimizhen")));
 }
 
 //关闭设置界面

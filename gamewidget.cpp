@@ -1,4 +1,4 @@
-#include "gamewidget.h"
+﻿#include "gamewidget.h"
 #include "ui_gamewidget.h"
 
 GameWidget::GameWidget(QWidget *parent) :
@@ -9,6 +9,8 @@ GameWidget::GameWidget(QWidget *parent) :
     mysql->connect();
 }
 int magicx=10;
+int totalScore = 0;
+int stage = 1;
 //背景初始化
 void GameWidget::setupScene(int i){
 
@@ -131,13 +133,15 @@ void GameWidget::setupScene(int i){
     anim1->setStartValue(QRect(610+1055, 2, 1055, 1073));
     anim1->setEndValue(QRect(610, 2, 1055, 1073));
     anim1->setEasingCurve(QEasingCurve::OutQuad);
-    //分数版
+    //分数板
+
     QPropertyAnimation* anim2 = new QPropertyAnimation(ui->scoreLbl, "geometry");
     anim2->setDuration(500);
     anim2->setStartValue(QRect(270, 0, 327, 178));
-
     anim2->setEndValue(QRect(270, 80, 327, 178));
     anim2->setEasingCurve(QEasingCurve::InQuad);
+
+
     //进度条
     QPropertyAnimation* anim3 = new QPropertyAnimation(progressBar,"geometry");
     anim3->setDuration(500);
@@ -649,7 +653,14 @@ void GameWidget::startGame(){
             }
             QSound *hit=new QSound(":/music/effect/hit.wav");
             hit->play();
+            if(challenge==0){
             scoreTextLbl->setText(QString::number(score));
+            }
+            if(challenge==1){
+            scoreTextLbl->setText("当前关卡:"+QString::number(stage)+"\n分数:"+QString::number(score)+"\n目标分数:"+QString::number(stage*200)+"\n总分:"+QString::number(totalScore));
+            QFont qfont("Arial",13);
+            scoreTextLbl->setFont(qfont);
+            }
             forbidAll(false);
             is_acting=false;
             int s = updateBombList();
@@ -724,6 +735,8 @@ void GameWidget::finishAct(){
         magicFill();
         FTime=0;
     }
+
+
 }
 
 QPropertyAnimation* GameWidget::startfallAnimation(Gem *gem, int h){
@@ -1128,6 +1141,9 @@ void GameWidget::fill(){
             }
 
     });
+
+
+
 }
 
 //生成Magic,并处理
@@ -1556,6 +1572,8 @@ int GameWidget::updateBombList() {
 
     // mysql->add(client->username,score);
     // mysql->change(client->username,score);
+
+
     return score;
 }
 
@@ -1641,6 +1659,7 @@ Point GameWidget::tipsdetect(){
 
 //处理消除和掉落
 void GameWidget::eliminateBoard() {
+    qDebug()<<"dfaoihfidgfidshfshfioi";
     // 如果游戏结束，则退出函数
     if (gameOver)
         return;
@@ -1718,7 +1737,36 @@ void GameWidget::eliminateBoard() {
             fill();
         });
     });
-}
+
+    int totalTime = 8000;
+        if(challenge==1){
+            bool flag=true;
+                if(score>=200*stage){
+
+                    totalScore+=score;
+                    Sleep(1000);
+                    reSetBoard();
+                    score=0;
+                    progressTimer->stop();
+                    redBorderTimer->stop();
+                    timeoutTimer->stop();
+                    progressBar->setValue(totalTime);
+
+                    progressTimer->setInterval(15);
+                    progressTimer->start();
+
+                    redBorderTimer->setInterval(500);
+
+                    timeoutTimer->setInterval(30);
+                    //timeoutTimer->start();
+                    flag=false;
+                    stage++;
+                 }
+                else{
+
+            }
+       }
+ }
 
 //旋转
 void GameWidget::makeSpin(int SX,int SY){

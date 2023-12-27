@@ -1,4 +1,4 @@
-#ifndef GAMEWIDGET_H
+﻿#ifndef GAMEWIDGET_H
 #define GAMEWIDGET_H
 
 #include <iostream>
@@ -52,6 +52,7 @@ class GameWidget : public QMainWindow
 
 public:
     int DIFFICULITY=5;
+    bool challenge=0;
     explicit GameWidget(QWidget *parent = nullptr);
     void setAdaptedImg(QString path,QLabel *label);
     void setupScene(int i);

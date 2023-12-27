@@ -100,11 +100,6 @@ rankListPage::rankListPage(QWidget *parent) :
     return;
   }
 
-  // QSqlTableModel *model = new QSqlTableModel(this, db);
-
-  // model->setTable("game_rank");
-  // model->select();
-
   // 创建一个数据模型，并将查询结果加载到模型中
   QSqlQueryModel *model = new QSqlQueryModel;
   model->setQuery(query);
