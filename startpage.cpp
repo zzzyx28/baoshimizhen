@@ -119,6 +119,10 @@ void StartPage::SetButton(){
      connect(select,&selectlevel::selectDone,[=](int difficulty){
         this->hide();
         sound->stop();
+        if(difficulty==8){
+            gameWidget->challenge=1;
+            difficulty=7;
+        }
         gameWidget->DIFFICULITY=difficulty;
         gameWidget->setupScene(this->ForGameL);
         gameWidget->show();
@@ -132,12 +136,14 @@ void StartPage::SetButton(){
             select->level2L->setText("普通");
             select->level2L->setGeometry(260,130,81,21);
             select->level3L->setText("困难");
+            select->level4L->setText("挑战");
             select->levelL->setText("设置");
             select->DoneL->setText("开始");
         }else{
             select->level1L->setText("Easy");
             select->level2L->setText("Medium");
             select->level3L->setText("Hard");
+            select->level4L->setText("Challenge");
             select->levelL->setText("Settings");
             select->DoneL->setText("Done");
         }
@@ -166,7 +172,7 @@ void StartPage::SetButton(){
     //语言切换
     connect(&settingP,&settingpage::selectLan,[=](int index){
 
-        if(index==1){
+        if(index==0){
             startButton->showContent("开始",40);
             recordButton->showContent("记录",20);
             settingButton->showContent("设置",20);
@@ -175,7 +181,7 @@ void StartPage::SetButton(){
             logoutButton->showContent("登出",10);
         }
 
-        if(index==0){
+        if(index==1){
             startButton->showContent("Start",40);
             recordButton->showContent("Record",20);
             settingButton->showContent("Settings",20);
