@@ -166,7 +166,7 @@ void StartPage::SetButton(){
     //语言切换
     connect(&settingP,&settingpage::selectLan,[=](int index){
 
-        if(index==0){
+        if(index==1){
             startButton->showContent("开始",40);
             recordButton->showContent("记录",20);
             settingButton->showContent("设置",20);
@@ -175,7 +175,7 @@ void StartPage::SetButton(){
             logoutButton->showContent("登出",10);
         }
 
-        if(index==1){
+        if(index==0){
             startButton->showContent("Start",40);
             recordButton->showContent("Record",20);
             settingButton->showContent("Settings",20);
